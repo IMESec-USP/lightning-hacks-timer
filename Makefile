@@ -5,7 +5,7 @@ dev:
 
 build:
 		yarn build
-		docker build -t .
+		docker build -t timer .
 
 build-and-run:
 		yarn build
