@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Play, Pause } from './icons'
 import './App.css'
 
 /*
@@ -16,9 +17,9 @@ class App extends Component {
       seconds: 0,
       minutesAtStart: 5,
       running: null,
+      showingHelp: null,
       timeEnded: false,
       loading: true,
-      showingHelp: false,
     }
   }
 
@@ -50,7 +51,23 @@ class App extends Component {
   }
 
   toggleHelp() {
-    this.setState({ showingHelp: !this.state.showingHelp })
+    this.setState(previousState => {
+      const { showingHelp } = previousState
+      let helpTimeout
+      if (showingHelp) {
+        clearTimeout(showingHelp)
+        helpTimeout = null
+      } 
+      else {
+        helpTimeout = setTimeout(() => {
+          this.setState({ showingHelp: null })
+        }, 10000)
+      }
+      return {
+        ...previousState,
+        showingHelp: helpTimeout,
+      }
+    })
   }
 
   incrementMinute() {
@@ -151,19 +168,32 @@ class App extends Component {
     return (
       <div className="help white">
         <p>
-          HelpText
+          space / ↲: start or pause the timer
+        </p>
+        <p>
+          r: resets timer
+        </p>
+        <p>
+          ↑: increments a minute in the timer
+        </p>
+        <p>
+          ↓: decrements a minute in the timer
         </p>
       </div>
     )
   }
 
   render() {
-    const { showingHelp, timeEnded, minutes, seconds } = this.state
+    const { running, showingHelp, timeEnded, minutes, seconds } = this.state
     return (
       <div className="timer">
         <p className="timer--counter white">
           { timeEnded && '-' }{ twoDigits(minutes) }:{ twoDigits(seconds) }
         </p>
+        <div className="icons">
+          <Play highlighted={!running} />
+          <Pause highlighted={!!running} />
+        </div>
         { showingHelp && this.showHelp() }
       </div>
     )
