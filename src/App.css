@@ -1,34 +1,42 @@
-@import url('https://fonts.googleapis.com/css?family=Orbitron:400,700');
+@import url('https://fonts.googleapis.com/css?family=Saira:400,700');
+
+@keyframes colorfade {
+  from {
+    color: #fff;
+  }
+  to {
+    color: #fefe00;
+  }
+}
 
 .timer {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #000;
+  background-color: #F70D88;
 }
 
 .timer--counter {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Saira', sans-serif;
   font-size: 27vmin;
   font-weight: 700;
 }
 
 .help {
   position: absolute;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 18pt;
+  font-family: 'Saira', sans-serif;
+  font-size: 1.5rem;
   top: 1vh;
   left: 1vw;
 }
 
-.black {
-  color: #000;
-}
-
 .white {
   color: #fff;
+}
+
+.ended-animation {
+  animation: colorfade cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s infinite alternate;
 }
 
 .fill-white {
@@ -36,7 +44,9 @@
 }
 
 .fill-grey {
-  fill: #444;
+  fill: #fff;
+  fill-opacity: 0.3;
+  mix-blend-mode: screen;
 }
 
 .icons {
@@ -51,5 +61,5 @@
 }
 
 .yellow {
-  color: #ebc700;
+  color: #fefe00;
 }
